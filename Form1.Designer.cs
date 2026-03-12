@@ -33,9 +33,14 @@
             buttonSelectFirmware = new Button();
             label2 = new Label();
             comboBoxSerialPort = new ComboBox();
+            labelVersion = new Label();
+            numericUpDownFwVersion = new NumericUpDown();
+            buttonQueryStatus = new Button();
+            buttonRollback = new Button();
             textBoxLog = new TextBox();
             progressBar = new ProgressBar();
             buttonUpgrade = new Button();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownFwVersion).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -57,7 +62,6 @@
             textBoxFirmware.ReadOnly = true;
             textBoxFirmware.Size = new Size(624, 30);
             textBoxFirmware.TabIndex = 1;
-            textBoxFirmware.TextChanged += textBox1_TextChanged;
             // 
             // buttonSelectFirmware
             // 
@@ -68,56 +72,96 @@
             buttonSelectFirmware.TabIndex = 2;
             buttonSelectFirmware.Text = "...";
             buttonSelectFirmware.UseVisualStyleBackColor = true;
-            buttonSelectFirmware.Click += buttonSlectFirmware_Click;
+            buttonSelectFirmware.Click += buttonSelectFirmware_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft YaHei UI", 10.5F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            label2.Location = new Point(63, 56);
+            label2.Location = new Point(27, 56);
             label2.Name = "label2";
             label2.Size = new Size(54, 28);
-            label2.TabIndex = 0;
+            label2.TabIndex = 3;
             label2.Text = "端口";
-            label2.Click += label2_Click;
             // 
             // comboBoxSerialPort
             // 
             comboBoxSerialPort.FormattingEnabled = true;
-            comboBoxSerialPort.Location = new Point(122, 53);
+            comboBoxSerialPort.Location = new Point(90, 53);
             comboBoxSerialPort.Name = "comboBoxSerialPort";
-            comboBoxSerialPort.Size = new Size(132, 32);
-            comboBoxSerialPort.TabIndex = 3;
+            comboBoxSerialPort.Size = new Size(120, 32);
+            comboBoxSerialPort.TabIndex = 4;
+            // 
+            // labelVersion
+            // 
+            labelVersion.AutoSize = true;
+            labelVersion.Font = new Font("Microsoft YaHei UI", 10.5F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            labelVersion.Location = new Point(225, 56);
+            labelVersion.Name = "labelVersion";
+            labelVersion.Size = new Size(82, 28);
+            labelVersion.TabIndex = 5;
+            labelVersion.Text = "固件版本";
+            // 
+            // numericUpDownFwVersion
+            // 
+            numericUpDownFwVersion.Location = new Point(315, 54);
+            numericUpDownFwVersion.Maximum = new decimal(new int[] { -1, 0, 0, 0 }); // uint.MaxValue
+            numericUpDownFwVersion.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDownFwVersion.Name = "numericUpDownFwVersion";
+            numericUpDownFwVersion.Size = new Size(100, 30);
+            numericUpDownFwVersion.TabIndex = 6;
+            numericUpDownFwVersion.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // buttonQueryStatus
+            // 
+            buttonQueryStatus.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            buttonQueryStatus.Location = new Point(428, 52);
+            buttonQueryStatus.Name = "buttonQueryStatus";
+            buttonQueryStatus.Size = new Size(150, 34);
+            buttonQueryStatus.TabIndex = 7;
+            buttonQueryStatus.Text = "查询 W25Q128 状态";
+            buttonQueryStatus.UseVisualStyleBackColor = true;
+            buttonQueryStatus.Click += buttonQueryStatus_Click;
+            // 
+            // buttonRollback
+            // 
+            buttonRollback.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            buttonRollback.Location = new Point(592, 52);
+            buttonRollback.Name = "buttonRollback";
+            buttonRollback.Size = new Size(100, 34);
+            buttonRollback.TabIndex = 8;
+            buttonRollback.Text = "回滚固件";
+            buttonRollback.UseVisualStyleBackColor = true;
+            buttonRollback.Click += buttonRollback_Click;
             // 
             // textBoxLog
             // 
             textBoxLog.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBoxLog.Font = new Font("Microsoft YaHei UI", 10.5F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            textBoxLog.Location = new Point(27, 91);
+            textBoxLog.Location = new Point(27, 96);
             textBoxLog.Multiline = true;
             textBoxLog.Name = "textBoxLog";
-            textBoxLog.Size = new Size(771, 406);
-            textBoxLog.TabIndex = 1;
-            textBoxLog.TextChanged += textBox1_TextChanged;
+            textBoxLog.ScrollBars = ScrollBars.Vertical;
+            textBoxLog.Size = new Size(771, 396);
+            textBoxLog.TabIndex = 9;
             // 
             // progressBar
             // 
-            progressBar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            progressBar.Location = new Point(27, 503);
+            progressBar.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            progressBar.Location = new Point(27, 498);
             progressBar.Name = "progressBar";
             progressBar.Size = new Size(771, 46);
-            progressBar.TabIndex = 4;
-            progressBar.Click += progressBar_Click;
+            progressBar.TabIndex = 10;
             // 
             // buttonUpgrade
             // 
-            buttonUpgrade.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            buttonUpgrade.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             buttonUpgrade.Font = new Font("微软雅黑", 18F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            buttonUpgrade.Location = new Point(27, 555);
+            buttonUpgrade.Location = new Point(27, 550);
             buttonUpgrade.Name = "buttonUpgrade";
             buttonUpgrade.Size = new Size(771, 82);
-            buttonUpgrade.TabIndex = 2;
-            buttonUpgrade.Text = "升 级";
+            buttonUpgrade.TabIndex = 11;
+            buttonUpgrade.Text = "升 级（加密 OTA → W25Q128）";
             buttonUpgrade.UseVisualStyleBackColor = true;
             buttonUpgrade.Click += buttonUpgrade_Click;
             // 
@@ -125,11 +169,15 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(822, 644);
+            ClientSize = new Size(822, 648);
             Controls.Add(progressBar);
+            Controls.Add(numericUpDownFwVersion);
+            Controls.Add(labelVersion);
             Controls.Add(comboBoxSerialPort);
             Controls.Add(buttonUpgrade);
             Controls.Add(buttonSelectFirmware);
+            Controls.Add(buttonQueryStatus);
+            Controls.Add(buttonRollback);
             Controls.Add(textBoxLog);
             Controls.Add(textBoxFirmware);
             Controls.Add(label2);
@@ -138,8 +186,9 @@
             MaximizeBox = false;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "串行升级工具";
+            Text = "串行升级工具 (IAP Bootloader)";
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)numericUpDownFwVersion).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -151,6 +200,10 @@
         private Button buttonSelectFirmware;
         private Label label2;
         private ComboBox comboBoxSerialPort;
+        private Label labelVersion;
+        private NumericUpDown numericUpDownFwVersion;
+        private Button buttonQueryStatus;
+        private Button buttonRollback;
         private TextBox textBoxLog;
         private ProgressBar progressBar;
         private Button buttonUpgrade;
